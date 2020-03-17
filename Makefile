@@ -1,2 +1,2 @@
 build: 
-	g++ -o server ./src/main.cpp ./src/server.cpp
+	g++ -fpermissive -o server ./src/main.cpp ./src/server.cpp
