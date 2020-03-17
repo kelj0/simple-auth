@@ -42,6 +42,8 @@ void Server::StartServer(){
     
     // create a socket
     this->sockfd = socket(AF_INET, SOCK_STREAM, 0);
+    int option = 1;
+    setsockopt(this->sockfd, SOL_SOCKET, SO_REUSEADDR, &option, sizeof(option));
     if(sockfd < 0){
         std::cout << "ERROR OPENING SOCKET! EXITING..\n";
         exit(-1);
@@ -63,14 +65,14 @@ void Server::StartServer(){
         ParseRequest();
         Respond("Hello\n");
         close(this->newsockfd);
-
         break;
     }
     close(this->sockfd);
+    std::cout << "Server done..\n";
 }
 
 Server::Server(){
-    this->PORT = 8080;
+    this->PORT = 80;
     StartServer();
 }
 
